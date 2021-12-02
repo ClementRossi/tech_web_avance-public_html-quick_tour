@@ -1,0 +1,10 @@
+# index:
+#     path: /
+#     controller: App\Controller\DefaultController::index
+
+# bonjour:
+#     path: /bonjour/{nom}/{qst}
+#     controller: App\Controller\DefaultController::index
+#     defaults:
+#         nom: 'toi'
+#         qst: 'ça va?'
