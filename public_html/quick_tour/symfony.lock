@@ -215,13 +215,9 @@
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
     },
-<<<<<<< HEAD
-    "symfony/options-resolver": {
-        "version": "v5.3.7"
-=======
+
     "symfony/password-hasher": {
         "version": "v5.3.8"
->>>>>>> 3806aab4d88741f09f9a8aae689f7ffa6d51ab69
     },
     "symfony/polyfill-intl-grapheme": {
         "version": "v1.23.1"
