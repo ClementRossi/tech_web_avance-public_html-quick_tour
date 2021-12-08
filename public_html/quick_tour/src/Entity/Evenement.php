@@ -39,6 +39,18 @@ class Evenement
      */
     private $tournois;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="Evenement")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $evenementUser;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="Evenement")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function __construct()
     {
         $this->tournois = new ArrayCollection();
@@ -111,6 +123,30 @@ class Evenement
                 $tournoi->setEv(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEvenementUser(): ?User
+    {
+        return $this->evenementUser;
+    }
+
+    public function setEvenementUser(?User $evenementUser): self
+    {
+        $this->evenementUser = $evenementUser;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
