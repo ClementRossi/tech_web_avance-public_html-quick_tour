@@ -3,6 +3,7 @@
 // src/Controller/DefaultController.php
 namespace App\Controller; // on est dans cet espace de nom
 use Symfony\Component\HttpFoundation\Response; // on utilise
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController{
@@ -24,6 +25,23 @@ class DefaultController{
             return new Response ("Bonjour $nom d'id $id " );
         }
     }
+
+    /**
+     * @route("/session/{k?}/{v?}")
+     */
+    function session($k, $v, SessionInterface $session) : Response{
+        $r="";
+        if($k===null){
+            foreach($session->all() as $c => $w){
+                $s=strval($w);
+                $r.=strval($c)."=>".$s."<br>";
+            }
+        }
+        else{
+            $session->set($k, $v);
+        }
+        return new Response($r);
+    }  
 
 }
 
