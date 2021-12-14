@@ -2,14 +2,14 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Tournoi;
+use App\Entity\Joueur;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
-class TournoiCrudController extends AbstractCrudController
+class JoueurCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Tournoi::class;
+        return Joueur::class;
     }
 
     /*

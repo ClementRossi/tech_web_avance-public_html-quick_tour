@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -34,6 +36,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Tournoi::class, mappedBy="Gestionnaire")
+     */
+    private $Gestion;
+
+    public function __construct()
+    {
+        $this->Gestion = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -122,5 +134,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection|Tournoi[]
+     */
+    public function getGestion(): Collection
+    {
+        return $this->Gestion;
+    }
+
+    public function addGestion(Tournoi $gestion): self
+    {
+        if (!$this->Gestion->contains($gestion)) {
+            $this->Gestion[] = $gestion;
+            $gestion->setGestionnaire($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGestion(Tournoi $gestion): self
+    {
+        if ($this->Gestion->removeElement($gestion)) {
+            // set the owning side to null (unless already changed)
+            if ($gestion->getGestionnaire() === $this) {
+                $gestion->setGestionnaire(null);
+            }
+        }
+
+        return $this;
     }
 }

@@ -33,6 +33,12 @@ class Tournoi
      */
     private $ev;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="Gestion")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Gestionnaire;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -70,6 +76,18 @@ class Tournoi
     public function setEv(?Evenement $ev): self
     {
         $this->ev = $ev;
+
+        return $this;
+    }
+
+    public function getGestionnaire(): ?User
+    {
+        return $this->Gestionnaire;
+    }
+
+    public function setGestionnaire(?User $Gestionnaire): self
+    {
+        $this->Gestionnaire = $Gestionnaire;
 
         return $this;
     }

@@ -25,31 +25,14 @@ class Evenement
     private $nom;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $dateDeb;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $dateFin;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Tournoi::class, mappedBy="ev")
-     */
-    private $tournois;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="Evenement")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $evenementUser;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="Evenement")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $user;
 
     public function __construct()
     {
@@ -73,24 +56,24 @@ class Evenement
         return $this;
     }
 
-    public function getDateDeb(): ?\DateTimeInterface
+    public function getDateDeb(): ?string
     {
         return $this->dateDeb;
     }
 
-    public function setDateDeb(?\DateTimeInterface $dateDeb): self
+    public function setDateDeb(?string $dateDeb): self
     {
         $this->dateDeb = $dateDeb;
 
         return $this;
     }
 
-    public function getDateFin(): ?\DateTimeInterface
+    public function getDateFin(): ?string
     {
         return $this->dateFin;
     }
 
-    public function setDateFin(?\DateTimeInterface $dateFin): self
+    public function setDateFin(?string $dateFin): self
     {
         $this->dateFin = $dateFin;
 

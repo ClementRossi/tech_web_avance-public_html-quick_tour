@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Evenement;
 use App\Entity\Tournoi;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class TournoiController extends AbstractController
 {
@@ -60,4 +61,26 @@ class TournoiController extends AbstractController
            $evts = $this->getDoctrine()->getManager()->getRepository("App\Entity\Evenement")->findAll();
            return $this->render ('tournoi/tournois.html.twig', ['evts'=>$evts,]);
        }
+
+       /**
+        * route("/tournoi/saisieTnoi/{evtid<[0-9]+>}", name=saisieTnoi)
+        */
+        public function saisieTnoi($evtid): Response{
+            $tnoi=new Tournoi();
+            $tnoi->setNom("");
+            $tnoi->setDescription("");
+            $form = $this->createFormBuilder($tnoi)
+            ->add('nom', TextType::class)
+            ->add('description', TextType::class)
+            ->add('sauver', SubmitType::class, ['label' => 'Créer le tournoi !'])
+            ->getForm();
+            return $this->render('tournoi/saisieTnoi.html.twig', ['form' => $form->createView()]);
+        }
+
+        /**
+         * route("tournoi/checkUser", name=checkUser)
+         */
+        public function checkUser(): Response{
+            return new Response ("l'utilisateur est: {$this->getUser()}");
+        }
 }
